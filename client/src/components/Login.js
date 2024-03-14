@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "../App.css";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import the CSS for styling
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
   const Email = email.toLowerCase();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,47 +18,45 @@ const Login = () => {
     }
 
     try {
-      let response = await fetch(
+      const response = await axios.post(
         "https://recipe-app-1-jspe.onrender.com/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email:Email, password }),
-        }
+        { email: Email, password }
       );
 
-      response = await response.json();
-
-      if (!response.error) {
+      if (!response.data.error) {
         toast.success("Login Successful");
-        localStorage.setItem("token", response.token);
+        localStorage.setItem("token", response.data.token);
 
         setTimeout(() => {
           window.location.href = "/";
         }, 2000);
       } else {
-        toast.error(response.error);
+        toast.error(response.data.error);
       }
     } catch (error) {
-      console.error("An error occurred while registering user:", error);
+      console.error("An error occurred while logging in:", error);
+      toast.error("An error occurred while logging in");
     }
   };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      axios.get("/", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(response => {
-        // Handle response
-        console.log(response.data);
-      })
-      .catch(error => {
-        // Handle error
-        console.error("Error fetching data:", error);
-      });
+      axios
+        .get("https://recipe-app-1-jspe.onrender.com/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          // Handle response
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Handle error
+          console.error("Error fetching data:", error);
+          toast.error("Unauthorized: Please log in.");
+        });
     }
   }, []);
 
@@ -74,13 +71,11 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           placeholder="Enter Your password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Submit</button>
-
-        <Link to="/forgotPassword">Forgot Password</Link>
       </form>
       {showError && (
         <span className="fill-fields-error">Please Fill all the fields</span>

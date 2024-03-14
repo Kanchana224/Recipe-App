@@ -22,17 +22,17 @@ const Register = () => {
     try {
       const response = await axios.post(
         "https://recipe-app-1-jspe.onrender.com/auth/register",
-        { name, email:Email, password }
+        { name, email: Email, password }
       );
 
       if (response.status === 201) {
-        const user = response.data;
+        const { newUser, token } = response.data;
 
-        if (user.error) {
+        if (newUser.error) {
           toast.warn("User already exists. Try with a different email.");
         } else {
           toast.success("Registration successful.");
-          localStorage.setItem("token", user.token);
+          localStorage.setItem("token", token);
           // Redirect to login page
           setTimeout(() => {
             window.location.href = "/login";
