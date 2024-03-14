@@ -3,8 +3,10 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser"); // Add body-parser for parsing request bodies
-const jwt = require("jsonwebtoken"); // Import jsonwebtoken module
+const bodyParser = require("body-parser");
+const verifyToken = require("./verifyToken"); // Import the verifyToken middleware
+
+// Import routes
 const LoginRoute = require("./routes/LoginRoute");
 const RegisterRoute = require("./routes/RegisterRoute");
 const RecipeRoute = require("./routes/RecipeRoute");
@@ -48,18 +50,3 @@ const PORT = process.env.PORT || 2000;
 app.listen(PORT, () => {
   console.log(`Server Started on port ${PORT}`);
 });
-
-// Middleware function for verifying JWT token
-function verifyToken(req, res, next) {
-  const token = req.header("Authorization");
-  if (!token) {
-    return res.status(401).json({ message: "Access denied. No token provided." });
-  }
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    req.token = decoded;
-    next();
-  } catch (error) {
-    res.status(403).json({ message: "Invalid token." });
-  }
-}
