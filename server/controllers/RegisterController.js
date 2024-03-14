@@ -15,7 +15,13 @@ const registerUser = async (req, res) => {
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
-    res.status(201).json({ newUser });
+    const token = jwt.sign(
+      { email: newUser.email, id: newUser._id },
+      process.env.SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(201).json({ newUser, token });
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).json({ error: "Internal server error" });

@@ -8,6 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
+  const [token, setToken] = useState(""); // Add state to store token
 
   const Email = email.toLowerCase();
 
@@ -26,12 +27,14 @@ const Register = () => {
       );
 
       if (response.status === 201) {
-        const { newUser } = response.data;
+        const { newUser, token } = response.data;
 
         if (newUser.error) {
           toast.warn("User already exists. Try with a different email.");
         } else {
           toast.success("Registration successful.");
+          localStorage.setItem("token", token);
+          setToken(token); // Set token state
           // Redirect to login page
           setTimeout(() => {
             window.location.href = "/login";
@@ -44,6 +47,11 @@ const Register = () => {
       toast.error("An error occurred while registering user:", error.message);
     }
   };
+
+  // Log token to console
+  useEffect(() => {
+    console.log("Token:", token);
+  }, [token]);
 
   return (
     <div className="SignupContainer">

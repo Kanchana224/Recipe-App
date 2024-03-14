@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +7,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
+  const [token, setToken] = useState(""); // Add state to store token
+
   const Email = email.toLowerCase();
 
   const handleSubmit = async (e) => {
@@ -25,7 +27,8 @@ const Login = () => {
 
       if (!response.data.error) {
         toast.success("Login Successful");
-        // Redirect to home page
+        localStorage.setItem("token", response.data.token);
+        setToken(response.data.token); // Set token state
         setTimeout(() => {
           window.location.href = "/";
         }, 2000);
@@ -37,6 +40,32 @@ const Login = () => {
       toast.error("An error occurred while logging in");
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("https://recipe-app-1-jspe.onrender.com/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          // Handle response
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Handle error
+          console.error("Error fetching data:", error);
+          toast.error("Unauthorized: Please log in.");
+        });
+    }
+  }, []);
+
+  // Log token to console
+  useEffect(() => {
+    console.log("Token:", token);
+  }, [token]);
 
   return (
     <div className="SignupContainer">
