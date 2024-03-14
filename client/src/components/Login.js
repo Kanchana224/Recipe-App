@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       let response = await fetch(
-        "http://localhost:2000/auth/login",
+        "https://recipe-app-ln5p.onrender.com/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

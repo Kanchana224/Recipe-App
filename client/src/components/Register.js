@@ -21,7 +21,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:2000/auth/register",
+        "https://recipe-app-ln5p.onrender.com/auth/register",
         { name, email: Email, password }
       );
 

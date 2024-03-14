@@ -13,7 +13,7 @@ const Recipes = () => {
   }, []);
 
   const getRecipes = () => {
-    fetch("http://localhost:2000/auth/recipe", {
+    fetch("https://recipe-app-ln5p.onrender.com/auth/recipe", {
       method: "GET",
       headers: {
         Authorization: `${localStorage.getItem("token")}`,
@@ -69,7 +69,7 @@ const Recipes = () => {
     try {
       // Send a POST request to the LikedList controller
       const response = await fetch(
-        `http://localhost:2000/auth/likedRecipes/${recipeId}`,
+        `https://recipe-app-ln5p.onrender.com/auth/likedRecipes/${recipeId}`,
         {
           method: "POST",
         }
@@ -98,7 +98,7 @@ const Recipes = () => {
     try {
       if (e.target.value) {
         let Searchedrecipes = await fetch(
-          `http://localhost:2000/auth/searchRecipes/${e.target.value}`,
+          `https://recipe-app-ln5p.onrender.com/auth/searchRecipes/${e.target.value}`,
           {
             method: "GET",
             headers: {
