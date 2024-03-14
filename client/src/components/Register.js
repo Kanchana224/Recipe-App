@@ -22,7 +22,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         "https://recipe-app-1-jspe.onrender.com/auth/register",
-        { name, email, password }
+        { name, email:Email, password }
       );
 
       if (response.status === 201) {
