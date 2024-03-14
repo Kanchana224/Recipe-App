@@ -26,13 +26,12 @@ const Register = () => {
       );
 
       if (response.status === 201) {
-        const { newUser, token } = response.data;
+        const { newUser } = response.data;
 
         if (newUser.error) {
           toast.warn("User already exists. Try with a different email.");
         } else {
           toast.success("Registration successful.");
-          localStorage.setItem("token", token);
           // Redirect to login page
           setTimeout(() => {
             window.location.href = "/login";

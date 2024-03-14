@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,8 +25,7 @@ const Login = () => {
 
       if (!response.data.error) {
         toast.success("Login Successful");
-        localStorage.setItem("token", response.data.token);
-
+        // Redirect to home page
         setTimeout(() => {
           window.location.href = "/";
         }, 2000);
@@ -38,27 +37,6 @@ const Login = () => {
       toast.error("An error occurred while logging in");
     }
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("https://recipe-app-1-jspe.onrender.com/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          // Handle response
-          console.log(response.data);
-        })
-        .catch((error) => {
-          // Handle error
-          console.error("Error fetching data:", error);
-          toast.error("Unauthorized: Please log in.");
-        });
-    }
-  }, []);
 
   return (
     <div className="SignupContainer">

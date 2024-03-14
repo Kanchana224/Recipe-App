@@ -16,17 +16,11 @@ const Login = async (req, res) => {
       return res.status(401).json({ error: "Incorrect password" });
     }
 
-    const token = jwt.sign(
-      { email: user.email, _id: user._id },
-      process.env.SECRET
-    );
-
     res.json({
-      token,
       user: { _id: user._id, name: user.name, email: user.email },
     });
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error("Error logging in:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
