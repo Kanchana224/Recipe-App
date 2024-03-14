@@ -22,7 +22,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         "https://recipe-app-ln5p.onrender.com/auth/register",
-        { name, email: Email, password }
+        { name, email, password }
       );
 
       if (response.status === 201) {
