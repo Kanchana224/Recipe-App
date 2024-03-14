@@ -3,10 +3,8 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const verifyToken = require("./verifyToken"); // Import the verifyToken middleware
-
-// Import routes
+const bodyParser = require("body-parser"); // Add body-parser for parsing request bodies
+const jwt = require("jsonwebtoken"); // Import jsonwebtoken module
 const LoginRoute = require("./routes/LoginRoute");
 const RegisterRoute = require("./routes/RegisterRoute");
 const RecipeRoute = require("./routes/RecipeRoute");
@@ -50,3 +48,5 @@ const PORT = process.env.PORT || 2000;
 app.listen(PORT, () => {
   console.log(`Server Started on port ${PORT}`);
 });
+
+
