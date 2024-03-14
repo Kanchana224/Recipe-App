@@ -21,7 +21,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://recipe-app-ln5p.onrender.com/auth/register",
+        "https://recipe-app-1-jspe.onrender.com/auth/register",
         { name, email, password }
       );
 

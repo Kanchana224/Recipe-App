@@ -53,7 +53,7 @@ const AddRecipe = () => {
 
     try {
       const response = await fetch(
-        "https://recipe-app-ln5p.onrender.com/auth/recipe",
+        "https://recipe-app-1-jspe.onrender.com/auth/recipe",
         {
           method: "POST",
           headers: {

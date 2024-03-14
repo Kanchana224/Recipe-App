@@ -14,7 +14,7 @@ const LikedProducts = () => {
     try {
       // Make a GET request to the /api/liked-products endpoint
       const response = await fetch(
-        "https://recipe-app-ln5p.onrender.com/auth/likedRecipes"
+        "https://recipe-app-1-jspe.onrender.com/auth/likedRecipes"
       );
 
       if (!response.ok) {
@@ -38,7 +38,7 @@ const LikedProducts = () => {
         )
       ) {
         const response = await fetch(
-          `https://recipe-app-ln5p.onrender.com/auth/removeLiked/${recipeId}`,
+          `https://recipe-app-1-jspe.onrender.com/auth/removeLiked/${recipeId}`,
           {
             method: "DELETE",
           }
@@ -60,7 +60,7 @@ const LikedProducts = () => {
   const handleAddToFavorites = async (recipeId) => {
     try {
       const response = await fetch(
-        `https://recipe-app-ln5p.onrender.com/auth/likedRecipes/${recipeId}`,
+        `https://recipe-app-1-jspe.onrender.com/auth/likedRecipes/${recipeId}`,
         {
           method: "POST",
         }

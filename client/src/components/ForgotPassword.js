@@ -19,7 +19,7 @@ const UpdatePassword = () => {
 
     try {
       const response = await fetch(
-        "https://recipe-app-ln5p.onrender.com/auth/forgotpassword",
+        "https://recipe-app-1-jspe.onrender.com/auth/forgotpassword",
         {
           method: "PUT",
           headers: {
