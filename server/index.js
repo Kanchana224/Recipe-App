@@ -40,7 +40,7 @@ app.use("/auth", RecipeRoute);
 app.use("/auth", ForgotPassword);
 
 // Default route with token verification
-app.get("/", verifyToken, (req, res) => {
+app.get("/", (req, res) => {
   res.send("Welcome to the home page");
 });
 

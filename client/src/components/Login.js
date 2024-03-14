@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import the CSS for styling
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -43,6 +44,24 @@ const Login = () => {
       console.error("An error occurred while registering user:", error);
     }
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.get("/", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        // Handle response
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Handle error
+        console.error("Error fetching data:", error);
+      });
+    }
+  }, []);
 
   return (
     <div className="SignupContainer">
