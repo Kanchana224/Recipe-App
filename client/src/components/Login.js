@@ -7,8 +7,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
-  const [token, setToken] = useState(""); // Add state to store token
-
   const Email = email.toLowerCase();
 
   const handleSubmit = async (e) => {
@@ -28,7 +26,7 @@ const Login = () => {
       if (!response.data.error) {
         toast.success("Login Successful");
         localStorage.setItem("token", response.data.token);
-        setToken(response.data.token); // Set token state
+
         setTimeout(() => {
           window.location.href = "/";
         }, 2000);
@@ -61,11 +59,6 @@ const Login = () => {
         });
     }
   }, []);
-
-  // Log token to console
-  useEffect(() => {
-    console.log("Token:", token);
-  }, [token]);
 
   return (
     <div className="SignupContainer">

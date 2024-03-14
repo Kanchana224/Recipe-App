@@ -1,21 +1,22 @@
 const jwt = require("jsonwebtoken");
+const User = require("../Schema/UserSchema");
 
-function verifyToken(req, res, next) {
-  const token = req.header("Authorization");
+const requireAuth = async (req, res, next) => {
+  const { authorization } = req.headers;
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Access denied. No token provided." });
+  if (!authorization) {
+    return res.status(401).json({ error: "Authorization token required" });
   }
 
+  const token = authorization.split(" ")[1];
   try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    req.token = decoded;
+    const { _id } = jwt.verify(token, process.env.SECRET);
+
+    req.user = await User.findOne({ _id }).select("_id");
     next();
   } catch (error) {
-    res.status(403).json({ message: "Invalid token." });
+    res.status(401).json({ error: "Request is not authorized" });
   }
-}
+};
 
-module.exports = verifyToken;
+module.exports = requireAuth;
