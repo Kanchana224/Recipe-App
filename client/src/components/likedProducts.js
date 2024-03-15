@@ -13,7 +13,7 @@ const LikedProducts = () => {
   const fetchLikedProducts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:2000/auth/likedRecipes",
+        "https://recipe-app-1-jspe.onrender.com/auth/likedRecipes",
         {
           method: "GET",
           headers: {
@@ -43,7 +43,7 @@ const LikedProducts = () => {
         )
       ) {
         const response = await fetch(
-          `http://localhost:2000/auth/removeLiked/${recipeId}`,
+          `https://recipe-app-1-jspe.onrender.com/auth/removeLiked/${recipeId}`,
           {
             method: "DELETE",
           }
@@ -65,7 +65,7 @@ const LikedProducts = () => {
   const handleAddToFavorites = async (recipeId) => {
     try {
       const response = await fetch(
-        `http://localhost:2000/auth/likedRecipes/${recipeId}`,
+        `https://recipe-app-1-jspe.onrender.com/auth/likedRecipes/${recipeId}`,
         {
           method: "POST",
         }

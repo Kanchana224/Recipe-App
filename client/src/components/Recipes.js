@@ -14,7 +14,7 @@ const Recipes = () => {
 
   const getRecipes = async () => {
     try {
-      const response = await fetch("http://localhost:2000/auth/recipe", {
+      const response = await fetch("https://recipe-app-1-jspe.onrender.com/auth/recipe", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,7 +39,7 @@ const Recipes = () => {
       if (window.confirm("Are you sure you want to delete this recipe?")) {
         // Send a DELETE request to the server
         const response = await fetch(
-          `http://localhost:2000/auth/recipe/${recipeId}`,
+          `https://recipe-app-1-jspe.onrender.com/auth/recipe/${recipeId}`,
           {
             method: "DELETE",
           }
@@ -69,7 +69,7 @@ const Recipes = () => {
     try {
       // Send a POST request to the LikedList controller
       const response = await fetch(
-        `http://localhost:2000/auth/likedRecipes/${recipeId}`,
+        `https://recipe-app-1-jspe.onrender.com/auth/likedRecipes/${recipeId}`,
         {
           method: "POST",
           headers: {
@@ -101,7 +101,7 @@ const Recipes = () => {
     try {
       if (e.target.value) {
         let Searchedrecipes = await fetch(
-          `http://localhost:2000/auth/searchRecipes/${e.target.value}`,
+          `https://recipe-app-1-jspe.onrender.com/auth/searchRecipes/${e.target.value}`,
           {
             method: "GET",
             headers: {

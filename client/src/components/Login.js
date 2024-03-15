@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:2000/auth/login",
+        "https://recipe-app-1-jspe.onrender.com/auth/login",
         { email: Email, password }
       );
 
