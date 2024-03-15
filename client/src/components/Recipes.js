@@ -15,6 +15,7 @@ const Recipes = () => {
   const getRecipes = async () => {
     try {
       const token = localStorage.getItem("token");
+console.log("Token:", token);
       if (!token) {
         throw new Error("Token not found in localStorage");
       }
