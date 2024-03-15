@@ -14,10 +14,15 @@ const Recipes = () => {
 
   const getRecipes = async () => {
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Token not found in localStorage");
+      }
+
       const response = await fetch("https://recipe-app-1-jspe.onrender.com/auth/recipe", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
