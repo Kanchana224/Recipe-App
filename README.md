@@ -1,6 +1,6 @@
 
 <h1>Recipe Management Web Application</h1>
-This repository contains a full-stack web application designed for recipe management, built using React.js for the frontend and Node.js with Express for the backend. The frontend is deployed on Netlify, accessible at localhost:3000, while the backend is hosted on Render, available at localhost:2000.
+This repository contains a full-stack web application designed for recipe management, built using React.js for the frontend and Node.js with Express for the backend. The frontend is deployed on Netlify, accessible at (http://localhost:8000/), while the backend is hosted on Render, available at (http://localhost:2000/).
 
 <h3>Features</h3>
 User Authentication: Users can sign up and log in securely to manage their recipes.
