@@ -72,12 +72,15 @@ const Recipes = () => {
         `http://localhost:2000/auth/likedRecipes/${recipeId}`,
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
-
+  
       if (response.ok) {
         toast.success("Recipe added to favorites successfully");
-
+  
         setTimeout(() => {
           window.location.href = "/favouriteRecipes";
         }, 4000);

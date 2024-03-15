@@ -12,17 +12,22 @@ const LikedProducts = () => {
 
   const fetchLikedProducts = async () => {
     try {
-      // Make a GET request to the /api/liked-products endpoint
       const response = await fetch(
-        "http://localhost:2000/auth/likedRecipes"
+        "http://localhost:2000/auth/likedRecipes",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
-
+  
       if (!response.ok) {
         toast.error("Failed to fetch liked products");
       }
-
+  
       const data = await response.json();
-
+  
       // Set the fetched data to the state
       setLikedProducts(data);
     } catch (error) {
