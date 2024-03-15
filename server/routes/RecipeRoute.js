@@ -13,10 +13,10 @@ const {
 } = require("../controllers/RecipeController");
 
 router.post("/recipe", createRecipe);
-router.get("/recipe", verifyToken, getAllRecipes);
+router.get("/recipe",  getAllRecipes);
 router.get("/likedRecipes", getAllLikedRecipes);
 router.delete("/recipe/:id", deleteRecipe);
-router.post("/likedRecipes/:id",verifyToken, LikedList);
+router.post("/likedRecipes/:id", LikedList);
 router.delete("/removeLiked/:id", removeFromLikedRecipes);
 router.get("/searchRecipes/:key", searchRecipes);
 
