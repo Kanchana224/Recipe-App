@@ -12,25 +12,25 @@ const Recipes = () => {
     getRecipes();
   }, []);
 
-  const getRecipes = () => {
-    fetch("https://recipe-app-1-jspe.onrender.com/auth/recipe", {
-      method: "GET",
-      headers: {
-        Authorization: `${localStorage.getItem("token")}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch recipe data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setRecipes(data);
-      })
-      .catch((error) => {
-        console.error(error);
+  const getRecipes = async () => {
+    try {
+      const response = await fetch("http://localhost:2000/auth/recipe", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch recipe data");
+      }
+
+      const data = await response.json();
+      setRecipes(data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch recipe data");
+    }
   };
 
   const handleDeleteRecipe = async (recipeId) => {
@@ -39,7 +39,7 @@ const Recipes = () => {
       if (window.confirm("Are you sure you want to delete this recipe?")) {
         // Send a DELETE request to the server
         const response = await fetch(
-          `https://recipe-app-1-jspe.onrender.com/auth/recipe/${recipeId}`,
+          `http://localhost:2000/auth/recipe/${recipeId}`,
           {
             method: "DELETE",
           }
@@ -69,7 +69,7 @@ const Recipes = () => {
     try {
       // Send a POST request to the LikedList controller
       const response = await fetch(
-        `https://recipe-app-1-jspe.onrender.com/auth/likedRecipes/${recipeId}`,
+        `http://localhost:2000/auth/likedRecipes/${recipeId}`,
         {
           method: "POST",
         }
@@ -98,7 +98,7 @@ const Recipes = () => {
     try {
       if (e.target.value) {
         let Searchedrecipes = await fetch(
-          `https://recipe-app-1-jspe.onrender.com/auth/searchRecipes/${e.target.value}`,
+          `http://localhost:2000/auth/searchRecipes/${e.target.value}`,
           {
             method: "GET",
             headers: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://recipe-app-1-jspe.onrender.com/auth/login",
+        "http://localhost:2000/auth/login",
         { email: Email, password }
       );
 
@@ -39,26 +39,7 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("https://recipe-app-1-jspe.onrender.com/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          // Handle response
-          console.log(response.data);
-        })
-        .catch((error) => {
-          // Handle error
-          console.error("Error fetching data:", error);
-          toast.error("Unauthorized: Please log in.");
-        });
-    }
-  }, []);
+ 
 
   return (
     <div className="SignupContainer">
